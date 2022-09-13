@@ -47,6 +47,7 @@ import io.github.droidkaigi.confsched2022.designsystem.theme.KaigiScaffold
 import io.github.droidkaigi.confsched2022.designsystem.theme.KaigiTheme
 import io.github.droidkaigi.confsched2022.designsystem.theme.KaigiTopAppBar
 import io.github.droidkaigi.confsched2022.feature.about.R.string
+import java.io.FileNotFoundException
 
 @Composable
 fun AboutScreenRoot(
@@ -179,12 +180,19 @@ fun About(
                         // TODO: Implement show staff screen
                     }
                 )
-
+                val privacyPolicyUrl = "https://portal.droidkaigi.jp/about/privacy"
                 AuxiliaryInformationRow(
                     imageVector = Icons.Filled.PrivacyTip,
                     textResId = string.about_privacy,
                     onClick = {
-                        // TODO: Implement privacy policy
+                        try {
+                            navigateToCustomTab(
+                                url = privacyPolicyUrl,
+                                context = context
+                            )
+                        }catch (e:Exception){
+                            //TODO: Implement error handling?
+                        }
                     }
                 )
 
